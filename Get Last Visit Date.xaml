@@ -1,10 +1,30 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="Get_Last_Visit_Date" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:eue="clr-namespace:Element5_Core.Utils.Exception;assembly=Element5.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="Input Chart Number" Name="ChartNumber" Type="InArgument(x:Int32)" />
-    <x:Property sap2010:Annotation.AnnotationText="Input Episode Number" Name="EpisodeNumber" Type="InArgument(x:Int32)" />
-    <x:Property sap2010:Annotation.AnnotationText="Input Visit Date" Name="VisitDate" Type="InArgument(x:String)" />
-    <x:Property sap2010:Annotation.AnnotationText="Input MyUnity Browser Tab" Name="MyUnityBrowserTab" Type="InArgument(ui:Browser)" />
-    <x:Property sap2010:Annotation.AnnotationText="Input Category Name eg: Nurses Clinical Notes" Name="CategoryName" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Input Chart Number" Name="ChartNumber" Type="InArgument(x:Int32)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property sap2010:Annotation.AnnotationText="Input Episode Number" Name="EpisodeNumber" Type="InArgument(x:Int32)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property sap2010:Annotation.AnnotationText="Input Visit Date" Name="VisitDate" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property sap2010:Annotation.AnnotationText="Input MyUnity Browser Tab" Name="MyUnityBrowserTab" Type="InArgument(ui:Browser)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property sap2010:Annotation.AnnotationText="Input Category Name eg: Nurses Clinical Notes" Name="CategoryName" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
     <x:Property sap2010:Annotation.AnnotationText="Last Visit Date Output" Name="LastVisitDate" Type="OutArgument(x:String)" />
   </x:Members>
   <this:Get_Last_Visit_Date.MyUnityBrowserTab>
@@ -13,7 +33,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1000,2021</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1000,2202</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Get_Last_Visit_Date_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="30">
@@ -70,19 +90,23 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>Element5.Core</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>Element5.MyUnity</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Module to get the Last Visit Date." DisplayName="Get_Last_Visit_Date" sap:VirtualizedContainerService.HintSize="556,1956" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Module to get the Last Visit Date." DisplayName="Get_Last_Visit_Date" sap:VirtualizedContainerService.HintSize="556,2137" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="EpisodeChildren" />
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="CategoryChildren" />
       <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="VisitDateChildren" />
-      <Variable x:TypeArguments="scg:List(x:String)" Name="VisitDateList" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="VisitDateList">
+        <Variable.Default>
+          <mva:VisualBasicValue x:TypeArguments="scg:List(x:String)" ExpressionText="New List(Of String)" />
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="x:String" Name="VisitDateAttribute" />
       <Variable x:TypeArguments="x:Boolean" Name="Exist" />
       <Variable x:TypeArguments="x:String" Name="ChartName" />
@@ -99,7 +123,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Start Process" sap:VirtualizedContainerService.HintSize="514,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Get Last Visit Date Module started&quot;]" />
-    <TryCatch DisplayName="Try Catch-Get Last Visit Date" sap:VirtualizedContainerService.HintSize="514,1571" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch-Get Last Visit Date" sap:VirtualizedContainerService.HintSize="514,1752" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -107,7 +131,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence DisplayName="Get Last Visit Date" sap:VirtualizedContainerService.HintSize="476,1322" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Get Last Visit Date" sap:VirtualizedContainerService.HintSize="476,1503" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -152,20 +176,20 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </ui:LogMessage>
-          <ui:BrowserScope BrowserType="{x:Null}" SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" Browser="[MyUnityBrowserTab]" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,752" sap2010:WorkflowViewState.IdRef="BrowserScope_1">
+          <ui:BrowserScope BrowserType="{x:Null}" SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" Browser="[MyUnityBrowserTab]" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="434,933" sap2010:WorkflowViewState.IdRef="BrowserScope_1">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,644" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="380,825" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence sap2010:Annotation.AnnotationText="Validates the landing page." DisplayName="Landing Validation" sap:VirtualizedContainerService.HintSize="200,97" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                  <Sequence sap2010:Annotation.AnnotationText="Validates the landing page." DisplayName="Landing Validation" sap:VirtualizedContainerService.HintSize="338,97" sap2010:WorkflowViewState.IdRef="Sequence_20">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -240,7 +264,7 @@
                       </If.Else>
                     </If>
                   </Sequence>
-                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                     <ui:MultipleAssign.AssignOperations>
                       <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                         <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -271,12 +295,12 @@
                     </ui:MultipleAssign.AssignOperations>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:MultipleAssign>
-                  <TryCatch DisplayName="Try Catch-Find Chart Number" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                  <TryCatch DisplayName="Try Catch-Find Chart Number" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -352,261 +376,237 @@
                       </Catch>
                     </TryCatch.Catches>
                   </TryCatch>
-                  <TryCatch DisplayName="Try Catch-Find Episode Number" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                  <Sequence sap2010:Annotation.AnnotationText="To find the required Episode Number for the input Chart Number" DisplayName="Find Episode Number" sap:VirtualizedContainerService.HintSize="338,123" sap2010:WorkflowViewState.IdRef="Sequence_4">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <TryCatch.Try>
-                      <Sequence sap2010:Annotation.AnnotationText="To find the required Episode Number for the input Chart Number" DisplayName="Find Episode Number" sap:VirtualizedContainerService.HintSize="200,123" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Finding required Episode Number&quot;]">
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Finding required Episode Number&quot;]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                    <ui:FindChildren Children="[EpisodeChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='DIV' id='episode*'  innertext='*{{EpisodeName}}*' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
+                      <ui:FindChildren.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[ChartTable]">
+                          <ui:Target.TimeoutMS>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:Target.TimeoutMS>
+                          <ui:Target.WaitForReady>
+                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                          </ui:Target.WaitForReady>
+                        </ui:Target>
+                      </ui:FindChildren.Target>
+                    </ui:FindChildren>
+                    <If sap2010:Annotation.AnnotationText="Checks if required Episode Number is found" Condition="[EpisodeChildren.Count=0]" DisplayName="If-Episode Number is found" sap:VirtualizedContainerService.HintSize="484,255" sap2010:WorkflowViewState.IdRef="If_9">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Throw Exception" sap:VirtualizedContainerService.HintSize="376,302" sap2010:WorkflowViewState.IdRef="Sequence_28">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                        </ui:LogMessage>
-                        <ui:FindChildren Children="[EpisodeChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='DIV' id='episode*'  innertext='*{{EpisodeName}}*' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_1" Scope="FIND_CHILDREN">
-                          <ui:FindChildren.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[ChartTable]">
-                              <ui:Target.TimeoutMS>
-                                <InArgument x:TypeArguments="x:Int32" />
-                              </ui:Target.TimeoutMS>
-                              <ui:Target.WaitForReady>
-                                <InArgument x:TypeArguments="ui:WaitForReady" />
-                              </ui:Target.WaitForReady>
-                            </ui:Target>
-                          </ui:FindChildren.Target>
-                        </ui:FindChildren>
-                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Trace" Message="[&quot;Required Episode Number Found&quot;]">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                        </ui:LogMessage>
-                      </Sequence>
-                    </TryCatch.Try>
-                    <TryCatch.Catches>
-                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,359" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <ActivityAction x:TypeArguments="s:Exception">
-                          <ActivityAction.Argument>
-                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                          </ActivityAction.Argument>
-                          <Sequence DisplayName="Error_handling" sap:VirtualizedContainerService.HintSize="354,290" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Trace" Message="[&quot;Required Episode Number not found&quot;]">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <eue:Log_Exception DisplayName="Log Exception" ExceptionObject="[exception]" sap:VirtualizedContainerService.HintSize="312,79" sap2010:WorkflowViewState.IdRef="Log_Exception_1" __Prefix="[IO.Directory.GetCurrentDirectory]" />
-                            <eue:Throw_Business_Exception DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="312,79" sap2010:WorkflowViewState.IdRef="Throw_Business_Exception_2" MessageCode="REQUIRED_EPISODE_NUMBER_NOT_FOUND" __Prefix="[IO.Directory.GetCurrentDirectory]">
-                              <eue:Throw_Business_Exception.ExtraMessage>
-                                <InArgument x:TypeArguments="x:String">
-                                  <Literal x:TypeArguments="x:String" DisplayName="Literal&lt;String&gt;" Value="" />
-                                </InArgument>
-                              </eue:Throw_Business_Exception.ExtraMessage>
-                            </eue:Throw_Business_Exception>
-                          </Sequence>
-                        </ActivityAction>
-                      </Catch>
-                    </TryCatch.Catches>
-                  </TryCatch>
-                  <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EpisodeChildren]">
+                          </ui:LogMessage>
+                          <eue:Throw_Business_Exception DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="Throw_Business_Exception_9" MessageCode="REQUIRED_EPISODE_NUMBER_NOT_FOUND" __Prefix="[IO.Directory.GetCurrentDirectory]">
+                            <eue:Throw_Business_Exception.ExtraMessage>
+                              <InArgument x:TypeArguments="x:String">
+                                <Literal x:TypeArguments="x:String" DisplayName="Literal&lt;String&gt;" Value="" />
+                              </InArgument>
+                            </eue:Throw_Business_Exception.ExtraMessage>
+                          </eue:Throw_Business_Exception>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Trace" Message="[&quot;Required Episode Number Found&quot;]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:LogMessage>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                  <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EpisodeChildren]">
                     <ui:ForEach.Body>
                       <ActivityAction x:TypeArguments="ui:UiElement">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="ui:UiElement" Name="item" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="349,550" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,306" sap2010:WorkflowViewState.IdRef="Sequence_10">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <TryCatch DisplayName="Try Catch-Find Category Name" sap:VirtualizedContainerService.HintSize="307,51" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                          <Sequence sap2010:Annotation.AnnotationText="To find the required category name for the input episode number" DisplayName="Find Category Name" sap:VirtualizedContainerService.HintSize="200,123" sap2010:WorkflowViewState.IdRef="Sequence_7">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <TryCatch.Try>
-                              <Sequence sap2010:Annotation.AnnotationText="To find the required category name for the input episode number" DisplayName="Find Category Name" sap:VirtualizedContainerService.HintSize="200,123" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Trace" Message="[&quot;Finding required Category Name&quot;]" />
-                                <ui:FindChildren Children="[CategoryChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='TBODY' innertext='*{{CategoryName}}*' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_2" Scope="FIND_DESCENDANTS">
-                                  <ui:FindChildren.Target>
-                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[item.Selector.ToString]">
-                                      <ui:Target.TimeoutMS>
-                                        <InArgument x:TypeArguments="x:Int32" />
-                                      </ui:Target.TimeoutMS>
-                                      <ui:Target.WaitForReady>
-                                        <InArgument x:TypeArguments="ui:WaitForReady" />
-                                      </ui:Target.WaitForReady>
-                                    </ui:Target>
-                                  </ui:FindChildren.Target>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Trace" Message="[&quot;Finding required Category Name&quot;]" />
+                            <ui:FindChildren Children="[CategoryChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='TBODY' innertext='*{{CategoryName}}*' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_2" Scope="FIND_DESCENDANTS">
+                              <ui:FindChildren.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[item.Selector.ToString]">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:FindChildren.Target>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:FindChildren>
+                            <If sap2010:Annotation.AnnotationText="Checks if required category name is found" Condition="[CategoryChildren.Count=0]" DisplayName="If-Category Name found" sap:VirtualizedContainerService.HintSize="755,491" sap2010:WorkflowViewState.IdRef="If_10">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence DisplayName="Throw Exception" sap:VirtualizedContainerService.HintSize="376,302" sap2010:WorkflowViewState.IdRef="Sequence_29">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                </ui:FindChildren>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Trace" Message="[&quot;Required Category Name not found&quot;]" />
+                                  <eue:Throw_Business_Exception DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="Throw_Business_Exception_10" MessageCode="REQUIRED_CATEGORY_NAME_NOT_FOUND" __Prefix="[IO.Directory.GetCurrentDirectory]">
+                                    <eue:Throw_Business_Exception.ExtraMessage>
+                                      <InArgument x:TypeArguments="x:String">
+                                        <Literal x:TypeArguments="x:String" DisplayName="Literal&lt;String&gt;" Value="" />
+                                      </InArgument>
+                                    </eue:Throw_Business_Exception.ExtraMessage>
+                                  </eue:Throw_Business_Exception>
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
                                 <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Trace" Message="[&quot;Required Category Name found&quot;]" />
-                              </Sequence>
-                            </TryCatch.Try>
-                            <TryCatch.Catches>
-                              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,135" sap2010:WorkflowViewState.IdRef="Catch`1_2">
-                                <sap:WorkflowViewStateService.ViewState>
-                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                  </scg:Dictionary>
-                                </sap:WorkflowViewStateService.ViewState>
-                                <ActivityAction x:TypeArguments="s:Exception">
-                                  <ActivityAction.Argument>
-                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                  </ActivityAction.Argument>
-                                  <Sequence DisplayName="Error_handling" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_8">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <eue:Log_Exception DisplayName="Log Exception" ExceptionObject="[exception]" sap:VirtualizedContainerService.HintSize="312,79" sap2010:WorkflowViewState.IdRef="Log_Exception_2" __Prefix="[IO.Directory.GetCurrentDirectory]" />
-                                    <eue:Throw_Business_Exception DisplayName="Throw Business Exception" sap:VirtualizedContainerService.HintSize="312,79" sap2010:WorkflowViewState.IdRef="Throw_Business_Exception_3" MessageCode="REQUIRED_CATEGORY_NAME_NOT_FOUND" __Prefix="[IO.Directory.GetCurrentDirectory]">
-                                      <eue:Throw_Business_Exception.ExtraMessage>
-                                        <InArgument x:TypeArguments="x:String">
-                                          <Literal x:TypeArguments="x:String" DisplayName="Literal&lt;String&gt;" Value="" />
-                                        </InArgument>
-                                      </eue:Throw_Business_Exception.ExtraMessage>
-                                    </eue:Throw_Business_Exception>
-                                  </Sequence>
-                                </ActivityAction>
-                              </Catch>
-                            </TryCatch.Catches>
-                          </TryCatch>
-                          <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="307,367" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[CategoryChildren]">
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                          <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[CategoryChildren]">
                             <ui:ForEach.Body>
                               <ActivityAction x:TypeArguments="ui:UiElement">
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="ui:UiElement" Name="item" />
                                 </ActivityAction.Argument>
-                                <Sequence sap:VirtualizedContainerService.HintSize="242,234" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                <Sequence sap:VirtualizedContainerService.HintSize="242,291" sap2010:WorkflowViewState.IdRef="Sequence_13">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <TryCatch DisplayName="Try Catch-Find Visit Dates" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                                  <Sequence sap2010:Annotation.AnnotationText="Finds all the visit dates for the required Category Name." DisplayName="Find Visit Dates" sap:VirtualizedContainerService.HintSize="200,108" sap2010:WorkflowViewState.IdRef="Sequence_9">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <TryCatch.Try>
-                                      <Sequence sap2010:Annotation.AnnotationText="Finds all the visit dates for the required Category Name." DisplayName="Find Visit Dates" sap:VirtualizedContainerService.HintSize="376,322" sap2010:WorkflowViewState.IdRef="Sequence_9">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Trace" Message="[&quot;Finding the Visit Dates&quot;]" />
-                                        <ui:FindChildren Children="[VisitDateChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='TD' colName='Form Date' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_3" Scope="FIND_DESCENDANTS">
-                                          <ui:FindChildren.Target>
-                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[item.Selector.ToString]">
-                                              <ui:Target.TimeoutMS>
-                                                <InArgument x:TypeArguments="x:Int32" />
-                                              </ui:Target.TimeoutMS>
-                                              <ui:Target.WaitForReady>
-                                                <InArgument x:TypeArguments="ui:WaitForReady" />
-                                              </ui:Target.WaitForReady>
-                                            </ui:Target>
-                                          </ui:FindChildren.Target>
-                                        </ui:FindChildren>
-                                      </Sequence>
-                                    </TryCatch.Try>
-                                    <TryCatch.Catches>
-                                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,452" sap2010:WorkflowViewState.IdRef="Catch`1_3">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <ActivityAction x:TypeArguments="s:Exception">
-                                          <ActivityAction.Argument>
-                                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                          </ActivityAction.Argument>
-                                          <Sequence DisplayName="Assign null value to LastVisitDate" sap:VirtualizedContainerService.HintSize="376,383" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Trace" Message="[&quot;Finding the Visit Dates&quot;]">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:LogMessage>
+                                    <ui:FindChildren Children="[VisitDateChildren]" DisplayName="Find Children" Filter="&lt;webctrl tag='TD' colName='Form Date' /&gt;" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="FindChildren_3" Scope="FIND_DESCENDANTS">
+                                      <ui:FindChildren.Target>
+                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="[item.Selector.ToString]">
+                                          <ui:Target.TimeoutMS>
+                                            <InArgument x:TypeArguments="x:Int32" />
+                                          </ui:Target.TimeoutMS>
+                                          <ui:Target.WaitForReady>
+                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                          </ui:Target.WaitForReady>
+                                        </ui:Target>
+                                      </ui:FindChildren.Target>
+                                    </ui:FindChildren>
+                                    <If sap2010:Annotation.AnnotationText="Checks if Visit Dates are found" Condition="[VisitDateChildren.Count=0]" DisplayName="If-Visit Dates found" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="If_11">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Sequence DisplayName="Assign null value to LastVisitDate" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:Boolean">[DatesFound]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Trace" Message="[&quot;No Visit Date Found&quot;]">
                                             <sap:WorkflowViewStateService.ViewState>
                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                               </scg:Dictionary>
                                             </sap:WorkflowViewStateService.ViewState>
-                                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
-                                              <Assign.To>
-                                                <OutArgument x:TypeArguments="x:Boolean">[DatesFound]</OutArgument>
-                                              </Assign.To>
-                                              <Assign.Value>
-                                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
-                                              </Assign.Value>
-                                            </Assign>
-                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Trace" Message="[&quot;No Visit Date Found&quot;]">
-                                              <sap:WorkflowViewStateService.ViewState>
-                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                </scg:Dictionary>
-                                              </sap:WorkflowViewStateService.ViewState>
-                                            </ui:LogMessage>
-                                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-                                              <Assign.To>
-                                                <OutArgument x:TypeArguments="x:String">[LastVisitDate]</OutArgument>
-                                              </Assign.To>
-                                              <Assign.Value>
-                                                <InArgument x:TypeArguments="x:String">
-                                                  <Literal x:TypeArguments="x:String" Value="" />
-                                                </InArgument>
-                                              </Assign.Value>
-                                            </Assign>
-                                          </Sequence>
-                                        </ActivityAction>
-                                      </Catch>
-                                    </TryCatch.Catches>
-                                  </TryCatch>
+                                          </ui:LogMessage>
+                                          <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                                            <Assign.To>
+                                              <OutArgument x:TypeArguments="x:String">[LastVisitDate]</OutArgument>
+                                            </Assign.To>
+                                            <Assign.Value>
+                                              <InArgument x:TypeArguments="x:String">
+                                                <Literal x:TypeArguments="x:String" Value="" />
+                                              </InArgument>
+                                            </Assign.Value>
+                                          </Assign>
+                                        </Sequence>
+                                      </If.Then>
+                                    </If>
+                                  </Sequence>
                                   <If Condition="[DatesFound]" DisplayName="If-VisitDateFound" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_6">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -628,10 +628,10 @@
                                               <ActivityAction.Argument>
                                                 <DelegateInArgument x:TypeArguments="ui:UiElement" Name="item" />
                                               </ActivityAction.Argument>
-                                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,306" sap2010:WorkflowViewState.IdRef="Sequence_12">
                                                 <sap:WorkflowViewStateService.ViewState>
                                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                   </scg:Dictionary>
                                                 </sap:WorkflowViewStateService.ViewState>
@@ -741,7 +741,7 @@
                             </ui:ForEach.Body>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
@@ -756,7 +756,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:ForEach>
-                  <If Condition="[DatesFound]" DisplayName="If-DatesFound" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_7">
+                  <If Condition="[DatesFound]" DisplayName="If-DatesFound" sap:VirtualizedContainerService.HintSize="338,51" sap2010:WorkflowViewState.IdRef="If_7">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -764,29 +764,29 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                      <Sequence sap:VirtualizedContainerService.HintSize="526,692" sap2010:WorkflowViewState.IdRef="Sequence_25">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checking each item in the list for the required visit date and finding the last visit date" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="200,108" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[VisitDateList]">
+                        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Checking each item in the list for the required visit date and finding the last visit date" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="484,318" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[VisitDateList]">
                           <ui:ForEach.Body>
                             <ActivityAction x:TypeArguments="x:String">
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,672" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_14">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <If Condition="[item=VisitDate]" DisplayName="If-Required Visit Date found in the list" sap:VirtualizedContainerService.HintSize="484,580" sap2010:WorkflowViewState.IdRef="If_3">
+                                <If Condition="[item=VisitDate]" DisplayName="If-Required Visit Date found in the list" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_3">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
@@ -848,7 +848,7 @@
                                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                   </scg:Dictionary>
                                                 </sap:WorkflowViewStateService.ViewState>
-                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Trace" Message="[&quot;Only one Visit Date Found&quot;]">
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Trace" Message="[&quot;Last Visit Date not Found&quot;]">
                                                   <sap:WorkflowViewStateService.ViewState>
                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -880,16 +880,16 @@
                           </ui:ForEach.Body>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:ForEach>
-                        <If Condition="[Flag=0]" DisplayName="If-Required Visit Date not found" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_8">
+                        <If Condition="[Flag=0]" DisplayName="If-Required Visit Date not found" sap:VirtualizedContainerService.HintSize="484,242" sap2010:WorkflowViewState.IdRef="If_8">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
@@ -901,7 +901,7 @@
                                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Trace" Message="[&quot;Required Visit Date Not Found&quot;]" />
+                              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Trace" Message="[&quot;Input Visit Date Not Found&quot;]" />
                               <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_8">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:String">[LastVisitDate]</OutArgument>
